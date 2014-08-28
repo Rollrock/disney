@@ -1,0 +1,352 @@
+//
+//  FirstViewController.m
+//  Disney
+//
+//  Created by zhuang chaoxiao on 13-10-24.
+//  Copyright (c) 2013年 zhuang chaoxiao. All rights reserved.
+//
+
+#import "ThirdViewController.h"
+#import "TourCellView.h"
+#import "JSONKit.h"
+#import "EGORefreshTableHeaderView.h"
+#import "GADBannerView.h"
+
+#import "MyWaitView.h"
+
+#define TOUR_FILE_NAME @"tourlist.txt"
+#define CELL_HEIGHT 60.0f
+
+//#define TOUR_LIST_URL @"http://www.999dh.net/disney/tour/tourlist.txt"
+#define TOUR_LIST_URL @"http://www.999dh.net/disney/tour/tourlist.txt"
+
+
+@interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
+{
+    NSMutableArray * _tourGuideArray;
+    EGORefreshTableHeaderView * _headView;
+    MyWaitView * _waitView;
+    
+    BOOL  _isLoading;
+}
+
+@end
+
+@implementation ThirdViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        
+        
+    }
+    return self;
+}
+
+
+-(void)laytouADVView:(CGRect)rect
+{
+    GADBannerView *_bannerView;
+    //_bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,0,320,50)];//设置位置
+    _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
+    
+    _bannerView.adUnitID = @"ca-app-pub-3058205099381432/9855707143";//调用你的id
+    
+    _bannerView.rootViewController = self;
+    
+    [self.view addSubview:_bannerView];//添加bannerview到你的试图
+    
+    [_bannerView loadRequest:[GADRequest request]];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
+#endif
+    
+    //
+    CGRect rect;
+    rect = CGRectMake(0, 0, 320, 50);
+    [self laytouADVView:rect];
+    
+    
+    rect = CGRectMake(0, 50, 320, [[UIScreen mainScreen] bounds].size.height-CUSTOM_TAB_BAR_HEIGHT-NAVIGATION_BAR_HEIGHT-5-50);
+    
+    [self.view setFrame:rect];
+     
+    _tabView = [[UITableView alloc]initWithFrame:rect];
+    _tabView.delegate = self;
+    _tabView.dataSource = self;
+    
+    [self.view addSubview:_tabView];
+    
+    rect = CGRectMake(0, -65, 320, 65);
+    _headView = [[EGORefreshTableHeaderView alloc]initWithFrame:rect];
+    _headView.delegate = self;
+    [_tabView addSubview:_headView];
+    
+    _tourGuideArray = [[NSMutableArray alloc]initWithCapacity:1];
+
+    _isLoading = NO;
+    
+    
+    [self autoDownLoadTourList];
+
+    self.view.backgroundColor = [UIColor redColor];
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"row:%d",indexPath.row);
+    
+    TourDetailViewController * vc = [[TourDetailViewController alloc]initWithNibName:nil bundle:nil];
+    vc.infoUrl = ((TourGuideInfo*)[_tourGuideArray objectAtIndex:indexPath.row]).detailUrl;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CELL_HEIGHT;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"count:%d",[_tourGuideArray count]);
+    return [_tourGuideArray count];
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * cellId = @"cellId";
+    
+    UITableViewCell * cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if( !cell )
+    {
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId]autorelease];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+     TourCellView * view = [[[TourCellView alloc]initWithFrame:CGRectMake(0, 0, 300, CELL_HEIGHT) withInfo:[_tourGuideArray objectAtIndex:indexPath.row]]autorelease];
+
+    [cell.contentView addSubview:view];
+        
+    return cell;
+}
+
+
+-(void)connection:(NSURLConnection*)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"connection error happended");
+}
+
+-(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data
+{
+    //NSLog(@"connection receive data:%@",data);
+    [_data appendData:data];
+}
+
+-(void)parseData
+{
+    [_tourGuideArray removeAllObjects];
+    
+    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
+    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,TOUR_FILE_NAME];
+    
+    NSString * str = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary * dict = [data objectFromJSONData];
+    
+    NSArray * array  = [dict objectForKey:@"info"];
+    
+    for(NSDictionary * subDict in array )
+    {
+        if( [subDict isKindOfClass:[NSDictionary class]])
+        {
+            TourGuideInfo * info = [[[TourGuideInfo alloc]init]autorelease];
+            [info fromDict:subDict];
+            [_tourGuideArray addObject:info];
+        }
+    }
+    
+    [_tabView reloadData];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection*)connection
+{
+    NSLog(@"download success");
+    
+    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
+    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,TOUR_FILE_NAME];
+    
+    if( [_data writeToFile:path atomically:YES])
+    {
+        NSLog(@"save file success");
+        
+        [_waitView dismisssaa];
+        
+        [self parseData];
+    }
+    else
+    {
+        NSLog(@"save file failed");
+    }
+    
+    [self reloadDataSourceDone];
+}
+
+
+-(void)autoDownLoadTourList
+{
+    NSFileManager * fileM = [NSFileManager defaultManager];
+    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
+    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,TOUR_FILE_NAME];
+    
+    if( ![fileM fileExistsAtPath:path] )
+    {
+        [self downLoadTourList];
+    }
+    else
+    {
+        NSCalendar * calendar = [NSCalendar currentCalendar];
+        NSUInteger flags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+        
+        NSDateComponents * dateC = [calendar components:flags fromDate:[NSDate date]];
+        
+        NSInteger day = [dateC day];
+        
+        if( day % 7 == 0 )
+        {
+            [self downLoadTourList];
+        }
+        else
+        {
+            [self parseData];
+        }
+    }
+}
+
+-(void)downLoadTourList
+{
+    _waitView = [[MyWaitView alloc]initWithParent:self.view];
+    
+    NSLog(@"start downLoadTourList");
+    
+    NSString * strUrl = TOUR_LIST_URL;
+    NSURL * url = [NSURL URLWithString:strUrl];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    NSMutableData *da = [[NSMutableData alloc]init];
+    NSURLConnection * con = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
+    
+    _data = da;
+    _conn = con;
+    
+    if( _conn != nil)
+    {
+        NSLog(@"create connection success");
+    }
+    else
+    {
+        NSLog(@"create connection failed");
+    }
+}
+
+-(void)reloadDataSourceDone
+{
+    _isLoading = NO;
+    
+    [_headView egoRefreshScrollViewDataSourceDidFinishedLoading:_tabView];
+}
+
+-(void)reloadDataSource
+{
+    _isLoading = YES;
+    
+    [self downLoadTourList];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_headView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [_headView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+    [self reloadDataSource];
+    
+    //NSLog(@"didTrigger");
+}
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+   // NSLog(@"isLoading:%d",_isLoading);
+    return _isLoading;
+}
+
+
+-(void)dealloc
+{
+    [_conn release];
+    [_data release];
+    [_tabView release];
+    
+    [_tourGuideArray removeAllObjects];
+    [_tourGuideArray release];
+    
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
