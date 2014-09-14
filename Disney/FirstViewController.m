@@ -20,7 +20,6 @@
 #define BIG_IMAGE_TAG  1001
 
 //#define TOUR_LIST_URL @"http://www.999dh.net/disney/intro/info.txt"
-#define TOUR_LIST_URL @"http://www.999dh.net/disney/intro/info.txt"
 
 @interface FirstViewController ()<EGORefreshTableHeaderDelegate>
 {
@@ -83,7 +82,9 @@
     
     _isLoading = NO;
     
-    [self autoDownLoadTourList];
+    //[self autoDownLoadTourList];
+    
+    [self parseData];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -97,9 +98,9 @@
     NSCalendar * cal = [NSCalendar currentCalendar];
     
     [data setCalendar:cal];
-    [data setYear:2014];
-    [data setMonth:9];
-    [data setDay:12];
+    [data setYear:SHOW_ADV_YEAR];
+    [data setMonth:SHOW_ADV_MONTH];
+    [data setDay:SHOW_ADV_DAY];
     
     NSDate * farDate = [cal dateFromComponents:data];
 
@@ -185,9 +186,8 @@
     
     //GAD_SIZE_300x250
     
-    GADBannerView *_bannerView;
-    //_bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,0,320,50)];//设置位置
-    _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
+     GADBannerView *_bannerView;
+     _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
     
     _bannerView.adUnitID = @"ca-app-pub-3058205099381432/9855707143";//调用你的id
     
@@ -389,8 +389,10 @@
         
         UIImageView * imageView = [[[UIImageView alloc]initWithFrame:rect]autorelease];
         
-        NSURL *url = [NSURL URLWithString:[_intro.imgUrlArray objectAtIndex:index]];
-        [imageView setImageWithURL:url];
+        NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[_intro.imgUrlArray objectAtIndex:index]];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+        imageView.image = image;
         
         ////
         imageView.userInteractionEnabled = YES;
@@ -419,24 +421,12 @@
     }
 }
 
-
--(void)connection:(NSURLConnection*)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"connection error happended");
-}
-
--(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data
-{
-    //NSLog(@"connection receive data:%@",data);
-    [_data appendData:data];
-}
-
 -(void)parseData
 {
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,INTRO_FILE_NAME];
     
-    NSString * str = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Introinfo.txt"];
+
+    NSString * str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
     
     NSDictionary * dict = [data objectFromJSONData];
@@ -450,83 +440,7 @@
 
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection*)connection
-{
-    NSLog(@"download success");
-    
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,INTRO_FILE_NAME];
-    
-    if( [_data writeToFile:path atomically:YES])
-    {
-        NSLog(@"save file success");
-        
-        NSString * text = [[[NSString alloc]initWithData:_data encoding:NSUTF8StringEncoding]autorelease];
-        NSLog(@"dataText:%@",text);
-        
-        [self parseData];
-    }
-    else
-    {
-        NSLog(@"save file failed");
-    }
-    
-    [self reloadDataSourceDone];
-}
 
-
--(void)autoDownLoadTourList
-{
-    NSFileManager * fileM = [NSFileManager defaultManager];
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,INTRO_FILE_NAME];
-    
-    if( ![fileM fileExistsAtPath:path] )
-    {
-        [self downLoadTourList];
-    }
-    else
-    {
-        NSCalendar * calendar = [NSCalendar currentCalendar];
-        NSUInteger flags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-        
-        NSDateComponents * dateC = [calendar components:flags fromDate:[NSDate date]];
-        
-        NSInteger day = [dateC day];
-        
-        if( 1)//;//day % 2 == 0 )
-        {
-            [self downLoadTourList];
-        }
-        else
-        {
-            [self parseData];
-        }
-    }
-}
-
--(void)downLoadTourList
-{
-    NSLog(@"start downLoadTourList");
-    
-    NSString * strUrl = TOUR_LIST_URL;
-    NSURL * url = [NSURL URLWithString:strUrl];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    NSMutableData *da = [[NSMutableData alloc]init];
-    NSURLConnection * con = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
-    
-    _data = da;
-    _conn = con;
-    
-    if( _conn != nil)
-    {
-        NSLog(@"create connection success");
-    }
-    else
-    {
-        NSLog(@"create connection failed");
-    }
-}
 
 -(void)reloadDataSourceDone
 {
@@ -539,8 +453,7 @@
 {
     _isLoading = YES;
     
-    [self downLoadTourList];
-}
+ }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -554,8 +467,6 @@
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
-    [self reloadDataSource];
-    
     //NSLog(@"didTrigger");
 }
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view

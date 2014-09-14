@@ -13,10 +13,6 @@
 #import "dataStruct.h"
 #import "JSONKit.h"
 
-#define SCENERY_DETAIL_LIST_URL @"http://www.999dh.net/disney/scenery/%@/info.txt"
-
-//#define SCENERY_FILE_NAME  @"scenery_file.txt"
-
 
 #define Scenery_DETAIL_IMAGE_WIDTH 310.0f
 #define Scenery_DETAIL_IMAGE_HEIGHT 200.0f
@@ -59,11 +55,9 @@
     
     _info = [[SceneryDetailInfo alloc]init];
     
-    [self autoDownLoadTourList];
-    
+    [self parseData];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
 }
 
 
@@ -85,7 +79,13 @@
         rect = CGRectMake(5, (5 + Scenery_DETAIL_IMAGE_HEIGHT) * index, Scenery_DETAIL_IMAGE_WIDTH, Scenery_DETAIL_IMAGE_HEIGHT);
         UIImageView * imgView1 = [[[UIImageView alloc]initWithFrame:rect]autorelease];
         //[imgView1 setImageWithURL:[NSURL URLWithString:@"http://i3.dpfile.com/pc/0ff70e6d8e3fc91379ea3470966116fb(278x200)/thumb.jpg"]];
-        [imgView1 setImageWithURL:[NSURL URLWithString: [_info.picUrlArry objectAtIndex:index]]];
+        //[imgView1 setImageWithURL:[NSURL URLWithString: [_info.picUrlArry objectAtIndex:index]]];
+        
+        NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[_info.picUrlArry objectAtIndex:index]];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+        imgView1.image = image;
+        
         [scrView addSubview:imgView1];
     }
     
@@ -177,104 +177,16 @@
     
 }
 
--(void)autoDownLoadTourList
-{
-    NSFileManager * fileM = [NSFileManager defaultManager];
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,self.sceneryName];
-    
-    if( ![fileM fileExistsAtPath:path] )
-    {
-        [self downLoadTourList];
-    }
-    else
-    {
-        NSCalendar * calendar = [NSCalendar currentCalendar];
-        NSUInteger flags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-        
-        NSDateComponents * dateC = [calendar components:flags fromDate:[NSDate date]];
-        
-        NSInteger day = [dateC day];
-        
-        if( 1 )//day % 7 == 0 )
-        {
-            [self downLoadTourList];
-        }
-        else
-        {
-            [self parseData];
-        }
-    }
-}
 
--(void)downLoadTourList
-{
-    NSLog(@"start downLoadTourList:%@",self.sceneryName);
-    
-    NSString * strUrl = [NSString stringWithFormat:SCENERY_DETAIL_LIST_URL,self.sceneryName];//SCENERY_DETAIL_LIST_URL;
-    
-   // NSString * strUrl = @"http://www.999dh.net/disney/scenery/txsj/info.txt";
-    
-    NSURL * url = [NSURL URLWithString:strUrl];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    NSMutableData *da = [[NSMutableData alloc]init];
-    NSURLConnection * con = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
-    
-    _data = da;
-    _conn = con;
-    
-    if( _conn != nil)
-    {
-        NSLog(@"create connection success");
-    }
-    else
-    {
-        NSLog(@"create connection failed");
-    }
-}
-
--(void)connection:(NSURLConnection*)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"connection error happended");
-}
-
--(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data
-{
-    NSLog(@"connection receive data:%@",data);
-    [_data appendData:data];
-}
-
-
--(void)connectionDidFinishLoading:(NSURLConnection*)connection
-{
-    NSLog(@"download success");
-    
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,self.sceneryName];
-    
-    if( [_data writeToFile:path atomically:YES])
-    {
-        NSLog(@"save file success");
-        
-        NSString * text = [[[NSString alloc]initWithData:_data encoding:NSUTF8StringEncoding]autorelease];
-        NSLog(@"dataText:%@",text);
-        
-        [self parseData];
-    }
-    else
-    {
-        NSLog(@"save file failed");
-    }
-    
-    //[self reloadDataSourceDone];
-}
 
 -(void)parseData
 {
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,self.sceneryName];
+    //NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
+    //NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,self.sceneryName];
     
-    NSString * str = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_info.txt",self.sceneryName]];
+    
+    NSString * str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
     
     NSDictionary * dict = [data objectFromJSONData];

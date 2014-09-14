@@ -92,6 +92,12 @@
         
     [self.view addSubview:_scrView];
     
+    
+    if( [_wInfo.tmpArray count] <= 0 )
+    {
+        return;
+    }
+    
     {
         rect = CGRectMake(15, 10, 180, 40);
         UILabel * lab = [[[UILabel alloc]initWithFrame:rect]autorelease];

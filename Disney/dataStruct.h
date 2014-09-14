@@ -17,6 +17,12 @@
 #endif
 
 
+
+#define SHOW_ADV_YEAR  2014
+#define SHOW_ADV_MONTH  10
+#define SHOW_ADV_DAY    1
+
+
 typedef enum
 {
     DATA_TYPE_HOTEL,

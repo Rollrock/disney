@@ -84,6 +84,8 @@
     
     UIImageView * imgView = [[[UIImageView alloc]initWithFrame:rect]autorelease];
     imgView.image = [UIImage imageNamed:@"icon"];
+    imgView.layer.cornerRadius = 10;
+    imgView.layer.masksToBounds = YES;
     
     [self.view addSubview:imgView];
     
@@ -93,7 +95,7 @@
     
     rect = CGRectMake(5, 10, 270, 20);
     UILabel * labName = [[[UILabel alloc]initWithFrame:rect]autorelease];
-    labName.text = @"联系人:   红双喜三字头";
+    labName.text = @"联系人:   小土豆";
     labName.backgroundColor = [UIColor clearColor];
     [imgBg addSubview:labName];
     

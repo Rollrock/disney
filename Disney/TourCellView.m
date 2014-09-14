@@ -29,8 +29,13 @@
         
         rect = CGRectMake(5, 5, IMAGE_WIDTH, IMAGE_HEIGHT);
         _imgView = [[[UIImageView alloc]initWithFrame:rect]autorelease];
-        //_imgView.image = [UIImage imageNamed:@"tourPic1"];
-        [_imgView setImageWithURL:[NSURL URLWithString:info.imgUrl] placeholderImage:nil];
+         
+        NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:info.imgUrl];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+        _imgView.image = image;
+
+        
         [self addSubview:_imgView];
         
         

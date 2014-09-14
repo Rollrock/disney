@@ -84,9 +84,9 @@
     NSCalendar * cal = [NSCalendar currentCalendar];
     
     [data setCalendar:cal];
-    [data setYear:2014];
-    [data setMonth:9];
-    [data setDay:12];
+    [data setYear:SHOW_ADV_YEAR];
+    [data setMonth:SHOW_ADV_MONTH];
+    [data setDay:SHOW_ADV_DAY];
     
     NSDate * farDate = [cal dateFromComponents:data];
     
@@ -98,7 +98,6 @@
     
     if( nowSec - farSec >= 0 )
     {
-        
         [YouMiWall showOffers:NO didShowBlock:^{
             NSLog(@"有米推荐墙已显示");
         } didDismissBlock:^{

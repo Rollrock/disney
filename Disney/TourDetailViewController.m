@@ -66,7 +66,7 @@
     descText = [[NSMutableString alloc]initWithCapacity:1];
     trafText = [[NSMutableString alloc]initWithCapacity:1];
     
-    [self downLoadInfoFile];
+    [self parseData];
     
     self.view.backgroundColor = [UIColor whiteColor];
 }
@@ -139,15 +139,18 @@
         CGRect rect = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+3)+5, TOUR_DETAIL_IMAGE_WIDTH, TOUR_DETAIL_IMAGE_HEIGHT);
         
         UIImageView * imageView = [[[UIImageView alloc]initWithFrame:rect]autorelease];
-        NSString * strUrl = [imgDataArray objectAtIndex:index];
-        NSURL * url = [NSURL URLWithString:strUrl];
-        [imageView setImageWithURL:url];
+        
+        NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[imgDataArray objectAtIndex:index]];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+        imageView.image = image;
+
         
         [scrView addSubview:imageView];
     }
     
     //广告
-    rect = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+3), TOUR_DETAIL_IMAGE_WIDTH, 50);
+    rect = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+5), TOUR_DETAIL_IMAGE_WIDTH, 50);
     [self initADVView:rect withView:scrView];
     
     //简要介绍
@@ -184,48 +187,14 @@
 }
 
 
--(void)downLoadInfoFile
-{
-    NSLog(@"start downLoadTourList:%@",self.infoUrl);
-    
-    NSURL * url = [NSURL URLWithString:self.infoUrl];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    NSMutableData *da = [[NSMutableData alloc]init];
-    NSURLConnection * con = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
-    
-    data = da;
-    coon = con;
-    
-    if( coon != nil)
-    {
-        NSLog(@"create connection success");
-    }
-    else
-    {
-        NSLog(@"create connection failed");
-    }
-    
-
-}
-
--(void)connection:(NSURLConnection*)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"connection error happended");
-}
-
--(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)da
-{
-    NSLog(@"connection receive data:%@",da);
-    [data appendData:da];
-    
-}
 
 
 -(void)parseData
 {
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,TOUR_DETAIL_INFO_FILE_NAME];
-    NSData * da = [NSData dataWithContentsOfFile:path];
+    
+    NSString * filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:_infoUrl];
+    
+    NSData * da = [NSData dataWithContentsOfFile:filePath];
     
     NSString * str = [[[NSString alloc]initWithData:da encoding:NSUTF8StringEncoding]autorelease];
     
@@ -251,28 +220,6 @@
     
     [self laytouView];
 
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection*)connection
-{
-    NSLog(@"download success");
-    
-    NSString *documentsDirectory =[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"];
-    NSString* path = [NSString stringWithFormat:@"%@/%@",documentsDirectory,TOUR_DETAIL_INFO_FILE_NAME];
-    
-    if( [data writeToFile:path atomically:YES])
-    {
-        NSLog(@"save file success");
-        
-        NSString * text = [[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]autorelease];
-        NSLog(@"dataText:%@",text);
-        
-        [self parseData];
-    }
-    else
-    {
-        NSLog(@"save file failed");
-    }
 }
 
 
