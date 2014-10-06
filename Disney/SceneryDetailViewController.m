@@ -95,7 +95,7 @@
     
     rect = CGRectMake(5, 5+height, 310, 50);
     GADBannerView *adView2 = [[[GADBannerView alloc]initWithFrame:rect]autorelease];
-    adView2.adUnitID = @"ca-app-pub-3058205099381432/9855707143";//调用你的id
+    adView2.adUnitID = ADMOB_ID;//调用你的id
     adView2.rootViewController = self;
     [scrView addSubview:adView2];
     [adView2 loadRequest:[GADRequest request]];

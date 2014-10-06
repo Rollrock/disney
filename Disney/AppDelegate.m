@@ -21,29 +21,44 @@
 }
 
 
-
 -(void)initLoacation
 {
-    _locMag = [[CLLocationManager alloc]init];
     
-    if( [_locMag locationServicesEnabled] )
-    {
-        _locMag.delegate = self;
-        _locMag.desiredAccuracy = kCLLocationAccuracyBest;
-        _locMag.distanceFilter = 200.0f;
-        [_locMag startUpdatingLocation];
-    }
+    _locMag = [[CLLocationManager alloc]init];
+    _locMag.delegate = self;
+    [_locMag requestAlwaysAuthorization];
+    _locMag.desiredAccuracy = kCLLocationAccuracyBest;
+    _locMag.distanceFilter = 500.0f;
+    [_locMag startUpdatingLocation];
+    
+    
 }
 
 
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    NSLog(@"location error!!!");
+    
+    NSLog(@"change");
+    
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            if( [_locMag respondsToSelector:@selector(requestAlwaysAuthorization)])
+            {
+                [_locMag requestWhenInUseAuthorization];
+            }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    NSLog(@"didUpdateLocations");
+    
     CLLocation * location = [locations lastObject];
     
     double dLon = location.coordinate.longitude;

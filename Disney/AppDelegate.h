@@ -10,6 +10,9 @@
 #import "MainViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
+
+
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 {
     CLLocationManager * _locMag;

@@ -17,10 +17,12 @@
 #endif
 
 
+#define ADMOB_ID  @"ca-app-pub-3058205099381432/8591538347"
+
 
 #define SHOW_ADV_YEAR  2014
 #define SHOW_ADV_MONTH  10
-#define SHOW_ADV_DAY    1
+#define SHOW_ADV_DAY    25
 
 
 typedef enum

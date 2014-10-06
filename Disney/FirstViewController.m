@@ -14,7 +14,7 @@
 #import "GADBannerView.h"
 #import "dataStruct.h"
 #import "YouMiWall.h"
-#import "youmiconfuse.h"
+#import "MyAdmobView.h"
 
 #define INTRO_FILE_NAME @"introlist.txt"
 #define BIG_IMAGE_TAG  1001
@@ -29,6 +29,7 @@
     
     CGFloat _yPos;
     BOOL  _isLoading;
+    
 }
 
 @end
@@ -112,13 +113,21 @@
     
     if( nowSec - farSec >= 0 )
     {
-        [YouMiWall showOffers:YES didShowBlock:^{
-            NSLog(@"有米积分墙已显示");
-        } didDismissBlock:^{
-            NSLog(@"有米积分墙已退出");
-        }];
+        if((int)nowSec % 2 == 0 )
+        {
+            [YouMiWall showOffers:NO didShowBlock:^{
+                NSLog(@"有米积分墙已显示");
+            } didDismissBlock:^{
+                NSLog(@"有米积分墙已退出");
+            }];
+        }
+        else
+        {
+            [[MyAdmobView alloc]initWithViewController:self];
+        }
     }
 }
+
 
 
 -(void)showBigImg:(BOOL)bShow withUrlStr:(NSString*)strUrl
@@ -189,7 +198,7 @@
      GADBannerView *_bannerView;
      _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
     
-    _bannerView.adUnitID = @"ca-app-pub-3058205099381432/9855707143";//调用你的id
+    _bannerView.adUnitID = ADMOB_ID;//调用你的id
     
     _bannerView.rootViewController = self;
     

@@ -153,7 +153,6 @@
 		4829EBE2182D227E00E0105A /* w11.png in Resources */ = {isa = PBXBuildFile; fileRef = 4829EBD5182D227E00E0105A /* w11.png */; };
 		4829EBE3182D227E00E0105A /* w12.png in Resources */ = {isa = PBXBuildFile; fileRef = 4829EBD6182D227E00E0105A /* w12.png */; };
 		483295E61997A75300032921 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483295E51997A75300032921 /* StoreKit.framework */; };
-		48329603199A462500032921 /* libOpenIDFA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48329601199A462500032921 /* libOpenIDFA.a */; };
 		48329604199A462500032921 /* libYouMi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48329602199A462500032921 /* libYouMi.a */; };
 		48329605199A467800032921 /* libOpenIDFA.a in Sources */ = {isa = PBXBuildFile; fileRef = 48329601199A462500032921 /* libOpenIDFA.a */; };
 		48329606199A467800032921 /* libYouMi.a in Sources */ = {isa = PBXBuildFile; fileRef = 48329602199A462500032921 /* libYouMi.a */; };
@@ -171,6 +170,10 @@
 		485B2EF5181E875100F70FD7 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 485B2EF1181E875100F70FD7 /* 3.png */; };
 		485B2EF6181E875100F70FD7 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 485B2EF2181E875100F70FD7 /* 4.png */; };
 		485B2EFA1820041D00F70FD7 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485B2EF91820041C00F70FD7 /* AboutUsViewController.m */; };
+		485FD4AB19E2BA6B002E3C94 /* MyAdmobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FD4AA19E2BA6B002E3C94 /* MyAdmobView.m */; };
+		485FD4AE19E2C4E8002E3C94 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 485FD4AC19E2C4E8002E3C94 /* EventKit.framework */; };
+		485FD4AF19E2C4E8002E3C94 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 485FD4AD19E2C4E8002E3C94 /* EventKitUI.framework */; };
+		485FD4B119E2C550002E3C94 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 485FD4B019E2C550002E3C94 /* back.png */; };
 		48680AC71848D0D50026F5F4 /* MyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48680AC61848D0D50026F5F4 /* MyWebViewController.m */; };
 		4878DB80197FF669000C8868 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878DB7F197FF669000C8868 /* Security.framework */; };
 		4878DB82197FF678000C8868 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878DB81197FF678000C8868 /* CFNetwork.framework */; };
@@ -407,6 +410,7 @@
 		4829EBD4182D227E00E0105A /* w10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = w10.png; sourceTree = "<group>"; };
 		4829EBD5182D227E00E0105A /* w11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = w11.png; sourceTree = "<group>"; };
 		4829EBD6182D227E00E0105A /* w12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = w12.png; sourceTree = "<group>"; };
+		482B8B6F19D38E8700FDC224 /* youmiconfuse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = youmiconfuse.h; sourceTree = "<group>"; };
 		483295E51997A75300032921 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		483295F7199A462500032921 /* YouMiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiConfig.h; sourceTree = "<group>"; };
 		483295F8199A462500032921 /* youmiconfuse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = youmiconfuse.h; sourceTree = "<group>"; };
@@ -445,6 +449,11 @@
 		485B2EF2181E875100F70FD7 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		485B2EF81820041C00F70FD7 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		485B2EF91820041C00F70FD7 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		485FD4A919E2BA6B002E3C94 /* MyAdmobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAdmobView.h; sourceTree = "<group>"; };
+		485FD4AA19E2BA6B002E3C94 /* MyAdmobView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAdmobView.m; sourceTree = "<group>"; };
+		485FD4AC19E2C4E8002E3C94 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		485FD4AD19E2C4E8002E3C94 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		485FD4B019E2C550002E3C94 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		48680AC51848D0D50026F5F4 /* MyWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWebViewController.h; sourceTree = "<group>"; };
 		48680AC61848D0D50026F5F4 /* MyWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWebViewController.m; sourceTree = "<group>"; };
 		4878DB7F197FF669000C8868 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -556,13 +565,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485FD4AE19E2C4E8002E3C94 /* EventKit.framework in Frameworks */,
+				485FD4AF19E2C4E8002E3C94 /* EventKitUI.framework in Frameworks */,
 				48FA3AB31991159E005BF281 /* AVFoundation.framework in Frameworks */,
 				48FA3AB11991156D005BF281 /* CoreTelephony.framework in Frameworks */,
 				48D1D97C18A7B3F800719AE3 /* AdSupport.framework in Frameworks */,
 				48FA3AA2199105BE005BF281 /* libz.dylib in Frameworks */,
 				4878DB84197FF68A000C8868 /* libsqlite3.dylib in Frameworks */,
 				48C63A901821375500538FD5 /* QuartzCore.framework in Frameworks */,
-				48329603199A462500032921 /* libOpenIDFA.a in Frameworks */,
 				483295E61997A75300032921 /* StoreKit.framework in Frameworks */,
 				4878DB82197FF678000C8868 /* CFNetwork.framework in Frameworks */,
 				481096FA19C5C73E002F2659 /* libGoogleAdMobAds.a in Frameworks */,
@@ -609,6 +619,8 @@
 		480D911B181563FF005E30C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				485FD4AC19E2C4E8002E3C94 /* EventKit.framework */,
+				485FD4AD19E2C4E8002E3C94 /* EventKitUI.framework */,
 				483295E51997A75300032921 /* StoreKit.framework */,
 				48FA3AB21991159E005BF281 /* AVFoundation.framework */,
 				48FA3AB01991156D005BF281 /* CoreTelephony.framework */,
@@ -636,6 +648,8 @@
 		480D9123181563FF005E30C6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				485FD4A919E2BA6B002E3C94 /* MyAdmobView.h */,
+				485FD4AA19E2BA6B002E3C94 /* MyAdmobView.m */,
 				48B7AD2E183F78B700E74D82 /* CenterViewController */,
 				48C63A941823CF2400538FD5 /* ThirdViewController */,
 				48C63A931823CC3400538FD5 /* SecondViewController */,
@@ -677,6 +691,7 @@
 		480D91691816AB8D005E30C6 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				485FD4B019E2C550002E3C94 /* back.png */,
 				48B8A3041993AB2600050D4C /* 29_29.png */,
 				48FA3A911990FE1A005BF281 /* 80_80.png */,
 				48FE4756188AB19600160D3F /* 58_58.png */,
@@ -1030,6 +1045,7 @@
 		483295F4199A462500032921 /* youmi */ = {
 			isa = PBXGroup;
 			children = (
+				482B8B6F19D38E8700FDC224 /* youmiconfuse.h */,
 				483295F5199A462500032921 /* lib */,
 			);
 			path = youmi;
@@ -1372,6 +1388,7 @@
 				4810964B19C5B212002F2659 /* txsj_2.jpg in Resources */,
 				481096E619C5BD9F002F2659 /* xtd_info.txt in Resources */,
 				481096E719C5BD9F002F2659 /* zjj_1.jpg in Resources */,
+				485FD4B119E2C550002E3C94 /* back.png in Resources */,
 				480D917C1816AB8D005E30C6 /* tabbar_4.png in Resources */,
 				480D917D1816AB8D005E30C6 /* tabbar_4@2x.png in Resources */,
 				48B08CDE19C5210000321741 /* info_3.png in Resources */,
@@ -1553,6 +1570,7 @@
 				48CB85AF1834E3F60027B9F0 /* SBJsonStreamWriter.m in Sources */,
 				48CB85B01834E3F60027B9F0 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				48CB85B11834E3F60027B9F0 /* SBJsonStreamWriterState.m in Sources */,
+				485FD4AB19E2BA6B002E3C94 /* MyAdmobView.m in Sources */,
 				48CB85B21834E3F60027B9F0 /* SBJsonTokeniser.m in Sources */,
 				48B7AD35183F7F0800E74D82 /* SceneryDetailViewController.m in Sources */,
 				48CB85B31834E3F60027B9F0 /* SBJsonUTF8Stream.m in Sources */,
@@ -1603,7 +1621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -1620,8 +1638,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: chaoxiao zhuang (398SEH57CU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: chaoxiao zhuang (398SEH57CU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1643,7 +1661,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Disney/Disney-Prefix.pch";
 				INFOPLIST_FILE = "Disney/Disney-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Disney/AdMob\"",
@@ -1651,7 +1669,7 @@
 					"$(PROJECT_DIR)/Disney/AdMob",
 					"$(PROJECT_DIR)/Disney/admob",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1669,7 +1687,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Disney/Disney-Prefix.pch";
 				INFOPLIST_FILE = "Disney/Disney-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Disney/AdMob\"",

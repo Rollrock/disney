@@ -58,4 +58,7 @@
 
 //appStoreURL
 @property(nonatomic, retain, readonly)     NSString    *linkURL;
+
+//bundle id
+@property(nonatomic, retain, readonly)      NSString    *identifier;
 @end

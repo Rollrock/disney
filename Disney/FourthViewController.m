@@ -13,7 +13,7 @@
 #import "dataStruct.h"
 #import "MyWebViewController.h"
 #import "YouMiWall.h"
-#import "youmiconfuse.h"
+//#import "youmiconfuse.h"
 
 #define ADV_LIST_URL @"http://www.999dh.net/disney/about/advlist.txt";
 

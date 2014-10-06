@@ -76,7 +76,7 @@
 {
     _bannerView = [[GADBannerView alloc]initWithFrame: rect];//CGRectMake(0.0,0,320,50)];//设置位置
     
-    _bannerView.adUnitID = @"ca-app-pub-3058205099381432/9855707143";//调用你的id
+    _bannerView.adUnitID = ADMOB_ID;//调用你的id
     
     _bannerView.rootViewController = self;
     
