@@ -89,8 +89,104 @@
     [YouMiConfig launchWithAppID:@"4a7e95875ecb8c0f" appSecret:@"0a3477b625d69c00"];
     [YouMiConfig setFullScreenWindow:self.window];
     
+    //
+    [WXApi registerApp:@"wx8ae0a52d0b488e34"];
+    
     return YES;
 }
+
+
+-(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+-(BOOL)application:(UIApplication*)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+
+-(void) onReq:(BaseReq*)req
+{
+    if([req isKindOfClass:[ShowMessageFromWXReq class]])
+    {
+        ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
+        WXMediaMessage *msg = temp.message;
+        
+        //显示微信传过来的内容
+        WXAppExtendObject *obj = msg.mediaObject;
+        
+        //NSString *strMsg = [NSString stringWithFormat:@"标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%u bytes\n\n", msg.title, msg.description, obj.extInfo, msg.thumbData.length];
+        
+        // NSLog(@"strMsg:%@",strMsg);
+        
+    }
+}
+
+-(void) onResp:(BaseResp*)resp
+{
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+        
+        NSLog(@"strMsg:%@",strMsg);
+        
+        
+        if( resp.errCode == 0 )
+        {
+            //发送成功
+        }
+        else if( resp.errCode == -2 )
+        {
+            //主动取消
+        }
+    }
+}
+
+-(void) shareWithTextUrl
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"我在用'上海迪士尼旅游攻略'，获得免费门票，还有公仔送哦~.";
+    [message setThumbImage:[UIImage imageNamed:@"res2.png"]];
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = @"https://itunes.apple.com/cn/app/shang-hai-lu-you-gong-e-zhi/id804556227?mt=8";
+    
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    
+    [WXApi sendReq:req];
+}
+
+- (void)shareWithImage
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    [message setThumbImage:[UIImage imageNamed:@"weixin_share"]];
+    
+    WXImageObject *ext = [WXImageObject object];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"weixin_share" ofType:@"png"];
+    NSLog(@"filepath :%@",filePath);
+    ext.imageData = [NSData dataWithContentsOfFile:filePath];
+    
+    UIImage* image = [UIImage imageWithData:ext.imageData];
+    ext.imageData = UIImagePNGRepresentation(image);
+    
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    
+    [WXApi sendReq:req];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "WXApi.h"
 
 
 
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate,WXApiDelegate>
 {
     CLLocationManager * _locMag;
 }
@@ -23,5 +23,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MainViewController * mainViewController;
+
+
+-(void) shareWithTextUrl;
 
 @end

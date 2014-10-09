@@ -13,6 +13,7 @@
 #import "dataStruct.h"
 #import "MyWebViewController.h"
 #import "YouMiWall.h"
+#import "AppDelegate.h"
 //#import "youmiconfuse.h"
 
 #define ADV_LIST_URL @"http://www.999dh.net/disney/about/advlist.txt";
@@ -185,6 +186,12 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
                
             }
+            else if( indexPath.row == 2 )
+            {
+                AppDelegate * appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                
+                [appDel shareWithTextUrl];
+            }
             break;
             
         case 1:
@@ -211,7 +218,7 @@
 {
     switch (section) {
         case 0:
-            return 2;
+            return 3;
             break;
             
         case 1:
@@ -265,6 +272,10 @@
             else if( indexPath.row == 1 )
             {
                 [[cell textLabel]setText:@"给我打分"];
+            }
+            else if( indexPath.row == 2 )
+            {
+                [[cell textLabel] setText:@"微信分享得奖"];
             }
             
             break;

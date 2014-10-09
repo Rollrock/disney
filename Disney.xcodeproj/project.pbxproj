@@ -178,6 +178,7 @@
 		4878DB80197FF669000C8868 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878DB7F197FF669000C8868 /* Security.framework */; };
 		4878DB82197FF678000C8868 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878DB81197FF678000C8868 /* CFNetwork.framework */; };
 		4878DB84197FF68A000C8868 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878DB83197FF68A000C8868 /* libsqlite3.dylib */; };
+		489E344F19E6CD3300A296AC /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489E344C19E6CD3300A296AC /* libWeChatSDK.a */; };
 		48AC1A421829090600570CD6 /* way_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 48AC1A411829090600570CD6 /* way_time.png */; };
 		48AC1A4918291C9F00570CD6 /* way_eat.png in Resources */ = {isa = PBXBuildFile; fileRef = 48AC1A4318291C9F00570CD6 /* way_eat.png */; };
 		48AC1A4A18291C9F00570CD6 /* way_hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 48AC1A4418291C9F00570CD6 /* way_hotel.png */; };
@@ -459,6 +460,9 @@
 		4878DB7F197FF669000C8868 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4878DB81197FF678000C8868 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4878DB83197FF68A000C8868 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		489E344C19E6CD3300A296AC /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		489E344D19E6CD3300A296AC /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		489E344E19E6CD3300A296AC /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		48AC1A411829090600570CD6 /* way_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = way_time.png; sourceTree = "<group>"; };
 		48AC1A4318291C9F00570CD6 /* way_eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = way_eat.png; sourceTree = "<group>"; };
 		48AC1A4418291C9F00570CD6 /* way_hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = way_hotel.png; sourceTree = "<group>"; };
@@ -581,6 +585,7 @@
 				4878DB80197FF669000C8868 /* Security.framework in Frameworks */,
 				48E67207183A3AB90061B2C0 /* MessageUI.framework in Frameworks */,
 				48E671FF183A3A860061B2C0 /* AudioToolbox.framework in Frameworks */,
+				489E344F19E6CD3300A296AC /* libWeChatSDK.a in Frameworks */,
 				48ED87B71833B60600863D8F /* CoreLocation.framework in Frameworks */,
 				485B2ED9181D54CA00F70FD7 /* MapKit.framework in Frameworks */,
 				480D911D181563FF005E30C6 /* UIKit.framework in Frameworks */,
@@ -1081,6 +1086,7 @@
 		485B2EA5181D455A00F70FD7 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				489E344B19E6CD3300A296AC /* WeChatSDK */,
 				481096EC19C5C73E002F2659 /* admob */,
 				483295F4199A462500032921 /* youmi */,
 				48CB858F1834E3F60027B9F0 /* SBJson */,
@@ -1145,6 +1151,16 @@
 				48680AC61848D0D50026F5F4 /* MyWebViewController.m */,
 			);
 			name = FourthViewController;
+			sourceTree = "<group>";
+		};
+		489E344B19E6CD3300A296AC /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				489E344C19E6CD3300A296AC /* libWeChatSDK.a */,
+				489E344D19E6CD3300A296AC /* WXApi.h */,
+				489E344E19E6CD3300A296AC /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
 		48B08CD319C5210000321741 /* intro */ = {
@@ -1668,6 +1684,7 @@
 					"$(PROJECT_DIR)/Disney/youmi/lib",
 					"$(PROJECT_DIR)/Disney/AdMob",
 					"$(PROJECT_DIR)/Disney/admob",
+					"$(PROJECT_DIR)/Disney/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1694,6 +1711,7 @@
 					"$(PROJECT_DIR)/Disney/youmi/lib",
 					"$(PROJECT_DIR)/Disney/AdMob",
 					"$(PROJECT_DIR)/Disney/admob",
+					"$(PROJECT_DIR)/Disney/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
