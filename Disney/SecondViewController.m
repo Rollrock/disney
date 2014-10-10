@@ -341,10 +341,7 @@
     
     if( 1 == index )
     {      
-        //TimeViewController * vc = [[[TimeViewController alloc]initWithNibName:nil bundle:nil]autorelease];
-        //[self.navigationController pushViewController:vc animated:YES];
-        
-        MyWebViewController * vc = [[[MyWebViewController alloc]initWithNibName:nil bundle:nil]autorelease];
+         MyWebViewController * vc = [[[MyWebViewController alloc]initWithNibName:nil bundle:nil]autorelease];
         vc.urlStr = @"http://www.999dh.net/disney/strategy/time.html";
         
         [self.navigationController pushViewController:vc animated:YES];
