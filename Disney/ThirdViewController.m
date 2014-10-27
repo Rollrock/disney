@@ -74,7 +74,7 @@
     
     //
     CGRect rect;
-    rect = CGRectMake(0, 0, 320, 50);
+    rect = CGRectMake(0, 0, 320, 100);
     [self laytouADVView:rect];
     
     

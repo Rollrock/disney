@@ -58,13 +58,13 @@
 -(void)laytouADVView
 {
     
-    _bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,0,320,50)];//设置位置
+    _bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,0,320,100)];//设置位置
     
     _bannerView.adUnitID = ADMOB_ID;//调用你的id
  
     _bannerView.rootViewController = self;
     
-    _adVgView = [[UIView alloc]initWithFrame:CGRectMake(0.0,0,320,50)];
+    _adVgView = [[UIView alloc]initWithFrame:CGRectMake(0.0,0,320,100)];
     [self.view addSubview:_adVgView];
     
     [_adVgView addSubview:_bannerView];//添加bannerview到你的试图

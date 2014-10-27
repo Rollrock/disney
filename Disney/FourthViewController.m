@@ -65,7 +65,7 @@
     [self.view addSubview:_tableView];
     
     
-    if( DEVICE_VER_7 == YES )
+    if( DEVICE_VER_OVER_7 == YES )
     {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }

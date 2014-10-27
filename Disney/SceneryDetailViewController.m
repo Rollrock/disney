@@ -90,28 +90,26 @@
     }
     
 
-    height = ([_info.picUrlArry count] -1)* (Scenery_DETAIL_IMAGE_HEIGHT + 5 );
+    height = ([_info.picUrlArry count] )* (Scenery_DETAIL_IMAGE_HEIGHT + 5 );
     
     
-    rect = CGRectMake(5, 5+height, 310, 50);
+    rect = CGRectMake(5, 5+height, 310, 100);
     GADBannerView *adView2 = [[[GADBannerView alloc]initWithFrame:rect]autorelease];
     adView2.adUnitID = ADMOB_ID;//调用你的id
     adView2.rootViewController = self;
     [scrView addSubview:adView2];
     [adView2 loadRequest:[GADRequest request]];
     
-    rect = CGRectMake(5, 5+height+50, 310, 20);
+    rect = CGRectMake(5, 5+height+100, 310, 20);
     UILabel * labTitle3 = [[[UILabel alloc]initWithFrame:rect]autorelease];
     //labTitle3.text = @"狮子王";
     labTitle3.text = _info.title;
     labTitle3.backgroundColor = [UIColor clearColor];
     [scrView addSubview:labTitle3];
     
-    //NSString * str = @"新华网青岛11月22日电 青岛黄岛区中石化输油管道泄漏事故现场指挥部认为，中石化输油管道泄漏事故初步原因分析是管线漏油进入市政管网导致起火发生，具体原因正在调查。11月22日凌晨3点，位于黄岛区秦皇岛路与斋堂岛路交汇处，中石化输油管线破裂。事故发生后，约3点15分关闭输油，斋堂岛街约1000平方米路面被原油污染，部分原油沿着雨水管线进入胶州湾，海面过油面积约3000平方米。黄岛区立即组织在海面布设两道围油栏。上午10点30分许，在处置过程中，黄岛区海河路和斋堂岛路交汇处起火，同时在入海口被油污染海";
-    
     NSString * str = _info.desc;
     
-    rect = CGRectMake(5, 5+height+50+20, 310, 0);
+    rect = CGRectMake(5, 5+height+100+20, 310, 0);
     UITextView * textView4 = [[[UITextView alloc]initWithFrame:rect]autorelease];
     textView4.text = str;
     textView4.editable = NO;
@@ -121,7 +119,7 @@
     [scrView addSubview:textView4];
     [self setTextViewFrame:textView4];
     
-    scrView.contentSize = CGSizeMake(320, 5+height+50+20 + textView4.frame.size.height + 20);
+    scrView.contentSize = CGSizeMake(320, 5+height+100+20 + textView4.frame.size.height + 20);
 
 }
 

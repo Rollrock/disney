@@ -1,7 +1,13 @@
 #import <Foundation/Foundation.h>
 
-#define DEVICE_VER_7  ([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0 ? YES:NO)
+//#define DEVICE_VER_7  ([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0 ? YES:NO)
 
+
+#define DEVICE_VER    ([[[UIDevice currentDevice] systemVersion] floatValue])
+
+#define DEVICE_VER_7  (((DEVICE_VER >=7.0) && (DEVICE_VER <8.0)) ?YES:NO)
+#define DEVICE_VER_8  (((DEVICE_VER >=8.0) && (DEVICE_VER <9.0)) ?YES:NO)
+#define DEVICE_VER_OVER_7 ((DEVICE_VER >=7.0)?YES:NO)
 
 #define NAVIGATION_BAR_HEIGHT 44.0f
 #define CUSTOM_TAB_BAR_HEIGHT 60.0f
@@ -21,8 +27,8 @@
 
 
 #define SHOW_ADV_YEAR  2014
-#define SHOW_ADV_MONTH  10
-#define SHOW_ADV_DAY    25
+#define SHOW_ADV_MONTH  11
+#define SHOW_ADV_DAY    5
 
 
 typedef enum

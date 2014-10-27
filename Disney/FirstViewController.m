@@ -216,12 +216,12 @@
     CGRect rect;
     
     //广告
-    rect = CGRectMake(5, yBegin, 310, 50);
+    rect = CGRectMake(5, yBegin, 310, 100);
     
     [self laytouADVView:rect];
     
     
-    yBegin += 50+10;
+    yBegin += 100+10;
     
     rect = CGRectMake(10, yBegin , 300, 2);
     [self layoutSepImgView:_scrView wihtRect:rect];
@@ -351,7 +351,7 @@
     
     // ios7
     
-    if( DEVICE_VER_7 == YES )
+    if( DEVICE_VER_OVER_7 == YES )
     {
         CGRect txtFrame = textView.frame;
         CGFloat textViewContentHeight = txtFrame.size.height =[[NSString stringWithFormat:@"%@\n  ",textView.text]

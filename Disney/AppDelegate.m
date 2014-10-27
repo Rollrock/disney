@@ -24,14 +24,28 @@
 -(void)initLoacation
 {
     
-    _locMag = [[CLLocationManager alloc]init];
-    _locMag.delegate = self;
-    [_locMag requestAlwaysAuthorization];
-    _locMag.desiredAccuracy = kCLLocationAccuracyBest;
-    _locMag.distanceFilter = 500.0f;
-    [_locMag startUpdatingLocation];
-    
-    
+    if( DEVICE_VER_8  )
+    {
+        _locMag = [[CLLocationManager alloc]init];
+        _locMag.delegate = self;
+        [_locMag requestAlwaysAuthorization];
+        _locMag.desiredAccuracy = kCLLocationAccuracyBest;
+        _locMag.distanceFilter = 500.0f;
+        [_locMag startUpdatingLocation];
+
+    }
+    else if( DEVICE_VER_7 )
+    {
+         _locMag = [[CLLocationManager alloc]init];
+        
+        if( [_locMag locationServicesEnabled] )
+        {
+            _locMag.delegate = self;
+            _locMag.desiredAccuracy = kCLLocationAccuracyBest;
+            _locMag.distanceFilter = 200.0f;
+            [_locMag startUpdatingLocation];
+        }
+    }
 }
 
 

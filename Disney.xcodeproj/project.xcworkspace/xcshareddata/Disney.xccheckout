@@ -14,7 +14,7 @@
 		<string>https://github.com/Rollrock/disney.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Disney.xcodeproj/project.xcworkspace</string>
+	<string>Disney.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BCAE74E39C2D2B0B688C45BB4DDF70A8B43BF90B</key>

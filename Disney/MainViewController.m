@@ -36,7 +36,7 @@
     
     CGRect rect;
     
-    if( DEVICE_VER_7 == YES )
+    if( DEVICE_VER_OVER_7 == YES )
     {
         rect = CGRectMake(0,  [[UIScreen mainScreen] bounds].size.height -STATUS_BAR_HEIGHT-CUSTOM_TAB_BAR_HEIGHT, 320, CUSTOM_TAB_BAR_HEIGHT);
 
@@ -64,7 +64,7 @@
     _firstViewC = [[FirstViewController alloc]initWithNibName:nil bundle:nil];
     _firstNav = [[UINavigationController alloc]init];
     
-    if( DEVICE_VER_7 == NO )
+    if( DEVICE_VER_OVER_7 == NO )
     {
     _firstNav.view.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - CUSTOM_TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT + CUSTOM_TAB_BAR_OFFSET+20);
     }
@@ -76,7 +76,7 @@
     
     _secondViewC = [[SecondViewController alloc]initWithNibName:nil bundle:nil];
     _secondNav = [[UINavigationController alloc]init];
-    if( DEVICE_VER_7 == NO )
+    if( DEVICE_VER_OVER_7 == NO )
     {
         _secondNav.view.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - CUSTOM_TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT + CUSTOM_TAB_BAR_OFFSET+20);
     }
@@ -90,7 +90,7 @@
     
     _centerViewC = [[CenterViewController alloc]initWithNibName:nil bundle:nil];
     _centerNav = [[UINavigationController alloc]init];
-    if( DEVICE_VER_7 == NO )
+    if( DEVICE_VER_OVER_7 == NO )
     {
         _centerNav.view.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - CUSTOM_TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT + CUSTOM_TAB_BAR_OFFSET+20);
     }
@@ -102,7 +102,7 @@
     
     _thirdViewC = [[ThirdViewController alloc]initWithNibName:nil bundle:nil];
     _thirdNav = [[UINavigationController alloc]init];
-    if( DEVICE_VER_7 == NO )
+    if( DEVICE_VER_OVER_7 == NO )
     {
         _thirdNav.view.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - CUSTOM_TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT + CUSTOM_TAB_BAR_OFFSET+20);
     }
@@ -115,7 +115,7 @@
     
     _fourthViewC = [[FourthViewController alloc]initWithNibName:nil bundle:nil];
     _fourthNav = [[UINavigationController alloc]init];
-    if( DEVICE_VER_7 == NO )
+    if( DEVICE_VER_OVER_7 == NO )
     {
         _fourthNav.view.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - CUSTOM_TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT + CUSTOM_TAB_BAR_OFFSET+20);
     }

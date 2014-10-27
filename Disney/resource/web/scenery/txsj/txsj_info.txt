@@ -8,9 +8,6 @@
         },
         {
             "imgUrl": "txsj_3.jpg"
-        },
-        {
-            "imgUrl": "txsj_4.jpg"
         }
     ],
     "title": "探险世界",

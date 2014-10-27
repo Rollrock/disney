@@ -150,7 +150,7 @@
     }
     
     //广告
-    rect = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+5), TOUR_DETAIL_IMAGE_WIDTH, 50);
+    rect = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+5), TOUR_DETAIL_IMAGE_WIDTH, 100);
     [self initADVView:rect withView:scrView];
     
     //简要介绍
@@ -161,11 +161,11 @@
     
     textLabel.text = descText;
     yPos = [self heightForString:descText fontSize:14 andWidth:TOUR_DETAIL_IMAGE_WIDTH];
-    textLabel.frame = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+3)+15 +50, TOUR_DETAIL_IMAGE_WIDTH, yPos);
+    textLabel.frame = CGRectMake(5, index*(TOUR_DETAIL_IMAGE_HEIGHT+3)+15 +100, TOUR_DETAIL_IMAGE_WIDTH, yPos);
     
     [scrView addSubview:textLabel];
     
-    yPos += index*(TOUR_DETAIL_IMAGE_HEIGHT+3)+15 +50;
+    yPos += index*(TOUR_DETAIL_IMAGE_HEIGHT+3)+15 +100;
     //公交信息
     rect = CGRectMake(5, yPos, TOUR_DETAIL_IMAGE_WIDTH, 0);
     trafLabel = [[[UILabel alloc]initWithFrame:rect]autorelease];
