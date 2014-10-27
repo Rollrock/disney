@@ -8,9 +8,6 @@
         },
         {
             "imgUrl": "hxsj_3.jpg"
-        },
-        {
-            "imgUrl": "hxsj_4.jpg"
         }
     ],
     "title": "幻想世界",
