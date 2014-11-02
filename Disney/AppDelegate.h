@@ -26,5 +26,6 @@
 
 
 -(void) shareWithTextUrl;
+-(BOOL)isWeChatValid;
 
 @end

@@ -158,8 +158,28 @@
     }
 }
 
+
+-(BOOL)isWeChatValid
+{
+    if( [WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi] )
+    {
+        return  YES;
+    }
+    
+    return NO;
+}
+
 -(void) shareWithTextUrl
 {
+    
+    if( ![self isWeChatValid ] )
+    {
+        UIAlertView * alterView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的手机没有安装微信，无法使用此功能~" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alterView show];
+        
+        return;
+    }
+    
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = @"我在用'上海迪士尼旅游攻略'，获得免费门票，还有公仔送哦~.";
     [message setThumbImage:[UIImage imageNamed:@"res2.png"]];

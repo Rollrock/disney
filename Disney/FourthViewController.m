@@ -105,7 +105,6 @@
             NSLog(@"有米推荐墙已退出");
         }];
     }
-
 }
 
 
@@ -148,8 +147,6 @@
     NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
     
     NSDictionary * dict = [data objectFromJSONData];
-    
-    NSLog(@"99ssssdict:%@",dict);
     
     if( [dict isKindOfClass:[NSDictionary class]] )
     {
