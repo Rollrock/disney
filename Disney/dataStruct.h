@@ -27,8 +27,8 @@
 
 
 #define SHOW_ADV_YEAR  2014
-#define SHOW_ADV_MONTH  11
-#define SHOW_ADV_DAY    5
+#define SHOW_ADV_MONTH  12
+#define SHOW_ADV_DAY    1
 
 
 typedef enum

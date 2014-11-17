@@ -215,7 +215,17 @@
 {
     switch (section) {
         case 0:
-            return 3;
+        {
+            AppDelegate * del = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            if( [del isWeChatValid ]  )
+            {
+                return 3;
+            }
+            else
+            {
+                return 2;
+            }
+        }
             break;
             
         case 1:
