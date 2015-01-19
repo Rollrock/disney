@@ -11,13 +11,14 @@
 #import "JSONKit.h"
 #import "EGORefreshTableHeaderView.h"
 #import "GADBannerView.h"
+#import "BaiduMobAdView.h"
 
 #import "MyWaitView.h"
 
 #define CELL_HEIGHT 60.0f
 
 
-@interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
+@interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,BaiduMobAdViewDelegate>
 {
     NSMutableArray * _tourGuideArray;
     EGORefreshTableHeaderView * _headView;
@@ -44,6 +45,7 @@
 
 -(void)laytouADVView:(CGRect)rect
 {
+    /*
     GADBannerView *_bannerView;
     //_bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,0,320,50)];//设置位置
     _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
@@ -55,7 +57,32 @@
     [self.view addSubview:_bannerView];//添加bannerview到你的试图
     
     [_bannerView loadRequest:[GADRequest request]];
+     */
+    
+    BaiduMobAdView * _baiduView = [[BaiduMobAdView alloc]init];
+    _baiduView.AdType = BaiduMobAdViewTypeBanner;
+    _baiduView.frame = CGRectMake(0, rect.origin.y, kBaiduAdViewBanner320x48.width, kBaiduAdViewBanner320x48.height);
+    
+    _baiduView.delegate = self;
+    [self.view addSubview:_baiduView];
+    [_baiduView start];
+    
+    
 }
+
+- (NSString *)publisherId
+{
+    return @"bf498248";
+}
+
+/**
+ *  应用在union.baidu.com上的APPID
+ */
+- (NSString*) appSpec
+{
+    return @"bf498248";
+}
+
 
 - (void)viewDidLoad
 {
@@ -103,7 +130,7 @@
     [self parseData];
     
     
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 

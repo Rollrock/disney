@@ -15,13 +15,14 @@
 #import "dataStruct.h"
 #import "YouMiWall.h"
 #import "MyAdmobView.h"
+#import "BaiduMobAdView.h"
 
 #define INTRO_FILE_NAME @"introlist.txt"
 #define BIG_IMAGE_TAG  1001
 
 //#define TOUR_LIST_URL @"http://www.999dh.net/disney/intro/info.txt"
 
-@interface FirstViewController ()<EGORefreshTableHeaderDelegate>
+@interface FirstViewController ()<EGORefreshTableHeaderDelegate,BaiduMobAdViewDelegate>
 {
     UIImageView * _bigImgView;
     IntroInfo * _intro;
@@ -195,6 +196,7 @@
     
     //GAD_SIZE_300x250
     
+    /*
      GADBannerView *_bannerView;
      _bannerView = [[[GADBannerView alloc]initWithFrame:rect]autorelease];//设置位置
     
@@ -205,6 +207,29 @@
     [_scrView addSubview:_bannerView];//添加bannerview到你的试图
     
     [_bannerView loadRequest:[GADRequest request]];
+     */
+    
+    
+    BaiduMobAdView * _baiduView = [[BaiduMobAdView alloc]init];
+    _baiduView.AdType = BaiduMobAdViewTypeBanner;
+    _baiduView.frame = CGRectMake(0, rect.origin.y+5, kBaiduAdViewBanner320x48.width, kBaiduAdViewBanner320x48.height);
+    
+    _baiduView.delegate = self;
+    [self.view addSubview:_baiduView];
+    [_baiduView start];
+}
+
+- (NSString *)publisherId
+{
+    return @"bf498248";
+}
+
+/**
+ *  应用在union.baidu.com上的APPID
+ */
+- (NSString*) appSpec
+{
+    return @"bf498248";
 }
 
 
@@ -216,12 +241,12 @@
     CGRect rect;
     
     //广告
-    rect = CGRectMake(5, yBegin, 310, 100);
+    rect = CGRectMake(5, yBegin, 310, 50);
     
     [self laytouADVView:rect];
     
     
-    yBegin += 100+10;
+    yBegin += 50+10;
     
     rect = CGRectMake(10, yBegin , 300, 2);
     [self layoutSepImgView:_scrView wihtRect:rect];
