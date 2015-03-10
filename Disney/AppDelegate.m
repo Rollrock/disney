@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "YouMiConfig.h"
 
 
 @implementation AppDelegate
@@ -99,10 +98,7 @@
     
     //[YouMiConfig setUserID:]; // [可选] 例如开发者的应用是有登录功能的，则可以使用登录后的用户账号来替代有米为每台机器提供的标识（有米会为每台设备生成的唯一标识符）。
     //[YouMiConfig setUseInAppStore:YES];  // [可选]开启内置appStore，详细请看YouMiSDK常见问题解答
-    
-    [YouMiConfig launchWithAppID:@"4a7e95875ecb8c0f" appSecret:@"0a3477b625d69c00"];
-    [YouMiConfig setFullScreenWindow:self.window];
-    
+       
     //
     [WXApi registerApp:@"wx8ae0a52d0b488e34"];
     

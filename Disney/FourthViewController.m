@@ -12,7 +12,6 @@
 #import "JSONKit.h"
 #import "dataStruct.h"
 #import "MyWebViewController.h"
-#import "YouMiWall.h"
 #import "AppDelegate.h"
 //#import "youmiconfuse.h"
 
@@ -99,11 +98,7 @@
     
     if( nowSec - farSec >= 0 )
     {
-        [YouMiWall showOffers:NO didShowBlock:^{
-            NSLog(@"有米推荐墙已显示");
-        } didDismissBlock:^{
-            NSLog(@"有米推荐墙已退出");
-        }];
+       
     }
 }
 

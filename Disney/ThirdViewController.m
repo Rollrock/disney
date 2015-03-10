@@ -10,7 +10,7 @@
 #import "TourCellView.h"
 #import "JSONKit.h"
 #import "EGORefreshTableHeaderView.h"
-#import "GADBannerView.h"
+//#import "GADBannerView.h"
 #import "BaiduMobAdView.h"
 
 #import "MyWaitView.h"

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GADBannerView.h"
-#import "GADAdSize.h"
+//#import "GADBannerView.h"
+//#import "GADAdSize.h"
 
-@interface MyAdmobView : UIView<GADBannerViewDelegate>
+@interface MyAdmobView : UIView//<GADBannerViewDelegate>
 
 
 -(id)initWithViewController:(UIViewController*)vc;

@@ -7,7 +7,6 @@
 //
 
 #import "MainViewController.h"
-#import "YouMiWall.h"
 
 @interface MainViewController ()<tabbarViewDelegate>
 

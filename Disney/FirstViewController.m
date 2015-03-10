@@ -11,9 +11,7 @@
 #import "JSONKit.h"
 #import "EGORefreshTableHeaderView.h"
 #import "SDWebImageManager.h"
-#import "GADBannerView.h"
 #import "dataStruct.h"
-#import "YouMiWall.h"
 #import "MyAdmobView.h"
 #import "BaiduMobAdView.h"
 
@@ -116,11 +114,6 @@
     {
         if((int)nowSec % 2 == 0 )
         {
-            [YouMiWall showOffers:NO didShowBlock:^{
-                NSLog(@"有米积分墙已显示");
-            } didDismissBlock:^{
-                NSLog(@"有米积分墙已退出");
-            }];
         }
         else
         {

@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 
+#import "GoogleMobileAds/GADInterstitial.h"
+#import "GoogleMobileAds/GADBannerView.h"
+
 //#define DEVICE_VER_7  ([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0 ? YES:NO)
 
 
@@ -39,6 +42,8 @@ typedef enum
 }SECOND_VIEW_DATA_TYPE;
 
 
+//@import GoogleMobileAds;
+@class GADBannerView;
 
 //////////////////////////////////////////////////////////////////
 @interface ProductInfo : NSObject

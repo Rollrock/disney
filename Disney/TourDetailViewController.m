@@ -9,7 +9,7 @@
 #import "TourDetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import "dataStruct.h"
-#import "GADBannerView.h"
+
 
 #define TOUR_DETAIL_IMAGE_WIDTH 310.0f
 #define TOUR_DETAIL_IMAGE_HEIGHT 200.0f

@@ -9,7 +9,6 @@
 #import "SceneryDetailViewController.h"
 
 #import "UIImageView+WebCache.h"
-#import "GADBannerView.h"
 #import "dataStruct.h"
 #import "JSONKit.h"
 
